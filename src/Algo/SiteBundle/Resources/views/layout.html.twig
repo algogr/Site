@@ -1,0 +1,45 @@
+{# src/Algo/SiteBundle/Resources/views/layout.html.twig #}
+{% extends 'FOSUserBundle::layout.html.twig' %}
+{% block stylesheets %}
+{{ parent()}}
+<link href="{{ asset('bundles/algosite/css/form.css') }}" type="text/css" rel="stylesheet" />
+<link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+{% endblock %}
+{%  block javascripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% endblock %}
+{% block sidebar %}
+    <div class="gadget">
+          <h2 class="star"><span>Επιλογές</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href={{ path('AlgoSiteBundle_homepage') }}>Home</a></li>
+            
+            {% if is_granted('ROLE_ADMIN') %}
+            <li><a href={{ path('AlgoSiteBundle_user_management') }}>Διαχείριση χρηστών</a></li>
+            <li><a href={{ path('AlgoSiteBundle_dojo_test') }}>Dojo test</a></li>
+            <li><a href={{ path('AlgoSiteBundle_blog_new') }}>Νέα Ανάρτηση</a></li>
+            
+            {% endif %}
+          </ul>
+        </div>
+        <div class="gadget">
+          <h2 class="star"><span>Links</span></h2>
+          <div class="clr"></div>
+          <ul class="ex_menu">
+          <li><a href="http://libreplanet.org/">LibrePlanet</a><br />
+            Ελεύθερο λογισμικό για έναν ελεύθερο κόσμο</li>
+            <li><a href="http://www.linuxjournal.com/">Linux Journal</a><br />
+            Ενημέρωση για τις εξελίξεις στο χώρο του GNU/Linux και του FOSS</li>
+            <li><a href="http://www.debian.org/">Debian</a><br />
+            Λειτουργικό σύστημα για server και για desktop</li>
+            <li><a href="http://www.asterisk.org//">Asterisk IP PBX</a><br />
+            Τηλεφωνικό κέντρο ανοιχτού κώδικα</li>
+            <li><a href="http://www.f-droid.org/">F-Droid</a><br />
+            Εφαρμογές ανοιχτού λογισμικού για Android</li>
+            
+          </ul>
+        </div>
+{% endblock %}

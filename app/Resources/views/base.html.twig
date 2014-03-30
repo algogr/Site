@@ -1,0 +1,117 @@
+<!-- app/Resources/views/base.html.twig -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}Αλγόριθμος Πληροφορική{% endblock %} - Αλγόριθμος Πληροφορική</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% block stylesheets %}
+<link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" "/>
+<link href="{{ asset('css/coin-slider.css')}}" rel="stylesheet" type="text/css" " />
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/cufon-yui.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/cufon-aller-700.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-1.4.2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/coin-slider.min.js') }}"></script>
+{% endblock %}
+</head>
+<body>
+<div class="main">
+{% block header %}
+  <div class="header">
+    <div class="header_resize">
+    {% block searchform %}
+    
+    {#  <div class="searchform">
+        <form id="formsearch" name="formsearch" method="post" action="#">
+          <span>
+          <input name="editbox_search" class="editbox_search" id="editbox_search" maxlength="80" value="Αναζήτηση:" type="text" />
+          </span>
+          <input name="button_search" src="{{asset('images/search.gif')}}" class="button_search" type="image" />
+        </form>
+      </div>#}
+      <div class="searchform">
+      {% if not app.user %}
+      
+      
+      {#  <form id="formsearch" name="formsearch" method="post" action="{{ path('AlgoSiteBundle_contact') }}">
+        
+          <span>
+          <input name="_username" class="editbox_search" id="username" maxlength="80" value="" type="text" />
+          </span>
+          <input name="button_search" src="{{asset('images/login-icon.gif')}}" class="button_search" type="image" />
+          <div class="clr"></div>
+          <span>
+          <input name="_password" class="editbox_search" id="password" maxlength="80" value="" type="password" />
+          </span>
+          
+          
+          
+        </form>
+        #}
+        
+      <a href={{ path('fos_user_security_login') }}>Είσοδος</a> &nbsp &nbsp
+      <a href={{ path('fos_user_registration_register') }}>Εγγραφή</a>
+      
+      
+      {% else %}
+      
+      <span>
+      Logged in as <a href={{ path('fos_user_profile_show') }}>{{ app.user.username }}</a> &nbsp &nbsp <a href={{ path('fos_user_security_logout') }}>Αποσύνδεση</a>
+      </span>
+      
+      {%  endif %}
+      </div>
+      {% endblock %}
+      {% block logo %}
+      <div class="logo_1">
+        <h1><a href="{{ path('AlgoSiteBundle_homepage') }}"><img src="{{ asset('images/algologo-1.png') }}" width="310" height="125" /></a></h1>
+      </div>
+      {% endblock %}
+      <div class="clr"></div>
+      {% block navigation %}
+      <div class="menu_nav">
+        <ul>
+          <li class="active"><a href="{{ path('AlgoSiteBundle_homepage') }}"><span>HOME</span></a></li>
+          <li><a href="#"><span>ΛΥΣΕΙΣ</span></a></li>
+          <li><a href="#"><span>ΥΠΗΡΕΣΙΕΣ</span></a></li>
+          <li><a href="{{ path('AlgoSiteBundle_team') }}"><span>ΟΜΑΔΑ</span></a></li>
+          <li><a href="{{ path('AlgoSiteBundle_contact')}}"><span>ΕΠΙΚΟΙΝΩΝΙΑ</span></a></li>
+         </ul>
+      </div>
+      {% endblock %}
+      {% block slidebar %}
+      {% endblock %}
+    </div>
+  </div>
+  {% endblock %}
+  <div class="content">
+    <div class="content_resize">
+    <div class="mainbar">
+    		{% block article_title %}
+    		{% endblock %}
+         {% block article %}
+        {% endblock %}
+        </div>
+        <div class="sidebar">
+      {% block sidebar %} {% endblock %}
+       </div>
+       <div class="clr"></div>
+        </div>       
+        </div>
+      <div class="clr"></div>
+    
+  <div class="footer">
+  {% block footer %}
+    <div class="footer_resize">
+     <p class="lf">&copy; <a href="#">Αλγόριθμος Πληροφορική</a>.</p>
+     <p class="rf">Powered by <a href="http://www.symfony.com/">Symfony2</a></p>
+
+      {% endblock %}
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

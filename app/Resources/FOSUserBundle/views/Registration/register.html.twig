@@ -1,0 +1,29 @@
+{% extends 'AlgoSiteBundle::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Εγγραφή{% endblock %}
+{% block article %}
+{% block fos_user_content %}
+{{ parent() }} 
+    <header>
+        <h1></h1>
+    </header>
+    {% if app.session.hasFlash('blogger-notice') %}
+    <div class="blogger-notice">
+        {{ app.session.flash('blogger-notice') }}
+    </div>
+{% endif %}
+
+    
+    <form action="{{ path('fos_user_registration_register') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_errors(form) }}
+        {{ form_row(form.email,{ 'label' : 'Email' }) }}
+        {{ form_row(form.name,{'label' : 'Επωνυμία' }) }}
+        {{ form_row(form.username,{ 'label' : 'Όνομα Χρήστη' }) }}
+        {{ form_row(form.plainPassword,{ 'label' : 'Κωδικός πρόσβασης' }) }}
+		{{ form_row(form.plainPassword,{ 'label' : 'Επιβεβαίωση κωδικού πρόσβασης' }) }} 
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Αποστολή" />
+    </form>
+{% endblock fos_user_content %}
+{% endblock %}

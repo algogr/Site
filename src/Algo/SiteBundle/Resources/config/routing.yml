@@ -1,0 +1,86 @@
+# src/Algo/SiteBundle/Resources/config/routing.yml
+AlgoSiteBundle_homepage:
+    pattern:  /
+    defaults: { _controller: AlgoSiteBundle:Page:index,page: 0 }
+    requirements:
+        _method:  GET|POST
+        
+        
+AlgoSiteBundle_team:
+    pattern:  /team
+    defaults: { _controller: AlgoSiteBundle:Page:team }
+    requirements:
+        _method:  GET|POST
+        
+AlgoSiteBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: AlgoSiteBundle:Page:contact }
+    requirements:
+        _method:  GET|POST
+        
+AlgoSiteBundle_blog_show:
+    pattern:  /{id}
+    defaults: { _controller: AlgoSiteBundle:Blog:show }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+AlgoSiteBundle_blog_new:
+    pattern: /admin/blog/new
+    defaults: { _controller: AlgoSiteBundle:Blog:new }
+    requirements:
+        _method:  GET|POST
+        
+#AlgoSiteBundle_downloads_list:
+ #   pattern:/downloads_list
+ #   defaults: {_controller:AlgoSiteBundle:Page:downloadslist}
+ #   requirements:
+ #   _method:  GET
+
+AlgoSiteBundle_upload:
+    pattern: /admin/blog/new
+    defaults: { _controller: AlgoSiteBundle:Blog:new }
+    requirements:
+        _method:  GET|POST
+
+AlgoSiteBundle_article_list:
+    pattern: /page/{page}
+    defaults: { _controller: "AlgoSiteBundle:Page:index"}
+    requirements:
+        _method:  GET|POST
+
+AlgoSiteBundle_user_management:
+    pattern: /admin/user/index
+    defaults: {_controller: "AlgoSiteBundle:Usermanagement:index"}
+    requirements:
+        _method:  GET
+        
+AlgoSiteBundle_user_edit:
+    pattern:  /admin/user/{id}
+    defaults: { _controller: AlgoSiteBundle:Usermanagement:edit }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+AlgoSiteBundle_dojo_test:
+    pattern:  /dojo
+    defaults: { _controller: AlgoSiteBundle:Page:dojotest }
+    requirements:
+        _method:  GET|POST
+        
+AlgoSiteBundle_blog_edit:
+    pattern:  /admin/edit/blog/{id}
+    defaults: { _controller: AlgoSiteBundle:Blog:edit }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+        
+AlgoSiteBundle_blog_delete:
+    pattern:  /admin/delete/blog/{id}
+    defaults: { _controller: AlgoSiteBundle:Blog:delete }
+    requirements:
+        _method:  GET
+        id: \d+
+
+        
+            

@@ -1,0 +1,40 @@
+{# src/Algo/SiteBundle/Resources/views/Blog/edit.html.twig #}
+{% extends 'AlgoSiteBundle::layout.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
+<script src="{{ asset('/js/tinymce/jquery.tinymce.min.js') }}"></script>    {{ form_javascript(form) }}
+        
+{% endblock %}
+
+{% block title %}Επεξεργασία ανάρτησης{% endblock %}
+{% block article %}
+    <header>
+        <h1></h1>
+    </header>
+    {% if app.session.hasFlash('blogger-notice') %}
+    <div class="blogger-notice">
+        {{ app.session.flash('blogger-notice') }}
+    </div>
+{% endif %}
+
+    <p></p>
+    
+    <form action="{{ path('AlgoSiteBundle_blog_edit',{ 'id': blog.id }) }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_errors(form) }}
+        
+
+        {{ form_row(form.title,{ 'label' : 'Τίτλος' }) }}
+        {{ form_row(form.author,{ 'label' : 'Συγγραφέας' }) }}
+        
+        {{ form_row(form.imagefile,{ 'label' : 'Εικόνα' },{'required': false}) }}
+        {{ form_row(form.blog,{ 'label' : 'Κείμενο' }) }}
+        
+		{{ form_row(form.tags,{ 'label' : 'Tags' }) }}
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Αποστολή" />
+    </form>
+{% endblock %}
+

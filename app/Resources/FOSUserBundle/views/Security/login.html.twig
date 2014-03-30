@@ -1,0 +1,30 @@
+{# app/Resources/FOSUserBundle/Security/login.html.twig#}
+{% extends "AlgoSiteBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{%  block article %}
+
+{% block fos_user_content %}
+
+{% if error %}
+    <div>{{ error|trans }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post" class="blogger" >
+    <input type="hidden" name="_csrf_token" value= {{ csrf_token }} />
+
+    <label for="username">{{ 'Χρήστης'|trans }}</label>
+    <input type="text" id="username" name="_username"required="required" />
+	<p>
+    <label for="password">{{ 'Κωδικός'|trans }}</label>
+    <input type="password" id="password" name="_password" required="required" />
+	<p>
+    <label for="remember_me">{{ 'Διατήρηση σύνδεσης'|trans }}</label>
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <p>
+	
+    <input type="submit" id="_submit" name="_submit" value="{{ 'Είσοδος'|trans }}" />
+</form> 
+
+{% endblock fos_user_content %}
+{% endblock article %}

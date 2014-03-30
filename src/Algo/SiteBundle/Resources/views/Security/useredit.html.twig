@@ -1,0 +1,32 @@
+{# src/Algo/SiteBundle/Resources/views/Security/useredit.html.twig #}
+{% extends 'AlgoSiteBundle::layout.html.twig' %}
+
+
+{% block title %}Επεξεργασία χρήστη χρήστη {{ user.username }}{% endblock %}
+{% block article %}
+    <header>
+        <h1></h1>
+    </header>
+    {% if app.session.hasFlash('blogger-notice') %}
+    <div class="blogger-notice">
+        {{ app.session.flash('blogger-notice') }}
+    </div>
+{% endif %}
+
+    <p></p>
+    
+    <form action="{{ path('AlgoSiteBundle_user_edit',{ 'id': user.id }) }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_errors(form) }}
+        
+
+        {{ form_row(form.username,{ 'label' : 'Username' }) }}
+        {{ form_row(form.name,{ 'label' : 'Name' }) }}
+        {{ form_row(form.enabled,{ 'label' : 'Enabled' }) }}
+        {{ form_row(form.approved,{ 'label' : 'Approved' }) }}
+        {{ form_row(form.email,{ 'label' : 'Email' }) }}
+		{{ form_row(form.rolelist{ 'label' : 'Roles' }) }}
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Αποστολή" />
+    </form>
+{% endblock %}

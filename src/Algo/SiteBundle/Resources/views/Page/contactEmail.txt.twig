@@ -1,0 +1,7 @@
+{# src/Algo/SiteBundle/Resources/views/Page/contactEmail.txt.twig #}
+Αίτηση επικοινωνίας έγινε από τον/την {{ enquiry.name }} στις {{ "now" | date("Y-m-d H:i") }}.
+
+Reply-To: {{ enquiry.email }}
+Θέμα: {{ enquiry.subject }}
+Σχόλια:
+{{ enquiry.body }}

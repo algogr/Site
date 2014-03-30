@@ -1,0 +1,34 @@
+{# src/Algo/SiteBundle/Resources/views/Security/userindex.html.twig #}
+{% extends 'AlgoSiteBundle::layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block article %}
+
+<form action="{{ path("fos_user_change_password") }}" method="GET" class="blogger" >
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    
+
+    <label for="name">Επωνυμία</label>
+    <input type="text" id="name" name="name" readonly="true" placeholder={{ user.name | json_encode() | raw }}/>
+	<p>
+	<label for="email">Email</label>
+	<input type="text" id="email" name="email" readonly="true" placeholder={{ user.email | json_encode() | raw }}/>
+	<p>
+	<label for="username">Όνομα Χρήστη</label>
+    <input type="text" id="username" name="username" readonly="true" placeholder={{ user.username | json_encode() | raw }}/>
+	<p>
+	<input type="submit" value="Αλλάγη κωδικού πρόσβασης" />
+	
+	
+    
+		
+    
+</form> 
+
+
+
+
+
+
+           
+      
+{% endblock %}

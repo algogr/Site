@@ -1,0 +1,84 @@
+{# src/Algo/SiteBundle/Resources/views/Security/userindex.html.twig #}
+{% extends 'AlgoSiteBundle::layout.html.twig' %}
+{% block stylesheets %}
+ {{ parent() }}
+ <link rel="stylesheet" href={{ asset('js/dojo/dijit/themes/claro/claro.css') }}>
+ <link rel="stylesheet" href={{ asset('js/dojo/resources/dojo.css') }}>
+ <link rel="stylesheet" href={{ asset('js/dojo/dgrid/css/dgrid.css') }}>
+ <link rel="stylesheet" href={{ asset('js/dojo/dgrid/css/skins/claro.css') }}> 
+{% endblock %}
+{%  block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/dojo/dojo/dojo.js') }}" 
+        data-dojo-config="async:true, parseOnLoad:true">
+        
+        </script>
+        <script>
+    require(["dojo/parser"]);
+    require(["dgrid/Grid", "dojo/domReady!"],function(Grid){
+    	var data = [
+                    {% for user in users %}
+                    { userid: {{ user.id | json_encode() }}, username: {{ user.username | json_encode() | raw }}, name: {{ user.name|json_encode()|raw }}, email:{{ user.email|json_encode()|raw }}, enabled: {{ user.enabled|json_encode()}}, approved: {{ user.approved|json_encode }} },
+                   {% endfor %}        
+            //{ username: "Bob", email: "Barker", enabled: 89,approved: 1 },
+            //{ first: "Vanna", last: "White", age: 55 },
+            //{ first: "Pat", last: "Sajak", age: 65 }
+        ];
+    	var columns=[
+                  	{	
+                      	label: "ID",
+							field: "userid",
+							formatter: function url(userid){
+								var xx='<a href=\"'+Routing.generate('AlgoSiteBundle_user_edit', { id: userid })+'\">'+userid+"</a>";
+								return xx;
+							}
+							
+							
+
+						},
+						{
+							label: "Username",
+							field: "username"
+							
+						},
+						{
+							label: "Name",
+							field: "name"
+						},
+						{
+							label: "Email",
+							field: "email"
+						},
+						{
+							label: "Enabled",
+							field: "enabled"
+						},
+						{
+							label: "Approved",
+							field: "approved"
+						}
+				];
+    	 var grid = new Grid({columns: columns}, "grid");
+         grid.renderArray(data);
+
+
+        });     
+            </script>
+       
+{%  endblock %}
+
+
+      
+{% block article %}
+{#
+          {% for user in users %}
+        <div class="article">
+          <span><a href="{{ path('AlgoSiteBundle_user_show', { 'id':user.id }) }}">{{ user.name(25) }}</a>
+          {{ user.email }}&nbsp {{ user.user }}&nbsp{{ user.enabled }}&nbsp{{ user. approved }}
+          {% endfor %}  #}
+          
+          <div id="grid" class="claro">
+          
+          </div> 
+      
+{% endblock %}

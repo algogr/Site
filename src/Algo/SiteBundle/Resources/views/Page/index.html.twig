@@ -1,0 +1,53 @@
+{# src/Algo/SiteBundle/Resources/views/Page/index.html.twig #}
+{% extends 'AlgoSiteBundle::layout.html.twig' %}
+
+{% block slidebar %}
+<div class="clr"></div>
+ <div class="slider">
+        
+        <div id="coin-slider"> <a href="#"><img src="{{ asset('images/3tier-2.png')}}" width="960" height="360" alt="" /><span><big>Λύσεις μηχανογράφησης επιχειρήσεων.</big><br />
+          Eγκατάσταση και παραμετροποίηση  συστημάτων ERP.Εξειδικευμένες λύσεις μηχανογράφησης και ανάπτυξη λογισμικού επικοινωνίας και ολοκλήρωσης διαδικασιών.</span></a> <a href="#"><img src="{{ asset('images/vpn.png')}}" width="960" height="360" alt="" /><span><big>Δικτυακές  λύσεις με ανοιχτό λογισμικό.</big><br />
+          To ανοιχτό λογισμικό, παρέχει λύσεις δικτύωσης βασισμένες στην ασφάλεια, στην επεκτασιμότητα και στο χαμηλό κόστος εγκατάστασης και συντήρησης. Λύσεις όπως το VPN και το IP/PBX ενοποιούν τα δίκτυα φωνής και δεδομένων,ανοίγοντας ένα τεράστιο πεδίο εφαρμογών για την αξιοποίηση τους.</span></a> <a href="#"><img src="{{ asset('images/lamp.png')}}" width="960" height="360" alt="" /><span><big>Διαδικτυακές εφαρμογές  αιχμής με ανοιχτό λογισμικό.</big><br />
+          Ανάπτυξη εφαρμογών διαδικτύου βασισμένες σε πλατφόρμες open source με τεχνολογίες αιχμής και με εγγύηση ασφάλειας και χαμηλού κόστους.</span></a> </div>
+        <div class="clr"></div>      
+      </div>
+      <div class="clr"></div>   
+      {% endblock %}
+      
+{% block article %}
+
+          {% for blog in blogs %}
+        <div class="article">
+          <h2><span><a href="{{ path('AlgoSiteBundle_blog_show', { 'id': blog.id }) }}">{{ blog.title(10) }}</a></h2>
+          <p class="infopost"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time> by {{blog.author}} &nbsp;&nbsp;|&nbsp;&nbsp; Filed under {{ blog.tags }} &nbsp;&nbsp; </p>
+          <div class="clr"></div>
+          {% if blog.image %}
+          <div class="img"><img src="{{ asset(['images/', blog.image]|join) }}" width="198" height="208" alt="" class="fl" /></div>
+          {% endif %}
+          <div class="post_content">
+            <p>{{ blog.brief|raw}}</p>
+            <p class="spec"><a href="{{ path('AlgoSiteBundle_blog_show', { 'id': blog.id }) }}" class="rm">ΔΙΑΒΑΣΤΕ ΠΕΡΙΣΣΟΤΕΡΑ...</a></p>
+          </div>
+          <div class="clr"></div>
+        </div>
+    {% else %}
+        <p>There are no blog entries for symblog</p>
+    {% endfor %}
+	{% if last_page>0 %}
+    {% if current_page==0 %}
+    <div>
+    <a  href="{{ path('AlgoSiteBundle_article_list', { 'page': next_page }) }}" class"rm">Προηγούμενες αναρτήσεις</a>
+     </div>
+     {%  else  %}
+     {% if next_page>last_page %}
+     <a href="{{ path('AlgoSiteBundle_article_list', { 'page': previous_page }) }}" class"rm">Νεότερες αναρτήσεις</a>
+     {% else %}
+     <a href="{{ path('AlgoSiteBundle_article_list', { 'page': previous_page }) }}" class"rm">Νεότερες αναρτήσεις</a>
+     <a href="{{ path('AlgoSiteBundle_article_list', { 'page': next_page }) }}" class"rm">Προηγούμενες αναρτήσεις</a> 
+     
+     {% endif %}
+        
+    {% endif %}
+    {% endif %}
+      
+{% endblock %}

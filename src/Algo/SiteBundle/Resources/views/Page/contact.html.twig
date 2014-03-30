@@ -1,0 +1,31 @@
+{# src/Algo/SiteBundle/Resources/views/Page/contact.html.twig #}
+{% extends 'AlgoSiteBundle::layout.html.twig' %}
+{% block title %}Επικοινωνία{% endblock %}
+{% block article %}
+    <header>
+        <h1></h1>
+    </header>
+    {% if app.session.hasFlash('blogger-notice') %}
+    <div class="blogger-notice">
+        {{ app.session.flash('blogger-notice') }}
+    </div>
+{% endif %}
+
+    <p>Θέλετε να επικοινωνήσετε μαζί μας;</p>
+    <p>H διεύθυνση μας είναι Ομονοίας 26-28 (Στοά Νότη) στην Καβάλα
+    <p>To τηλέφωνο και το fax είναι 2510-600096
+    <p>Eναλλακτικά μπoρείτε να συμπληρώσετε την παρακάτω φόρμα και θα επικοινωνήσουμε εμείς μαζί σας</p>  
+    
+    <form action="{{ path('AlgoSiteBundle_contact') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name,{ 'label' : 'Όνομα' }) }}
+        {{ form_row(form.email,{ 'label' : 'Email' }) }}
+        {{ form_row(form.subject,{ 'label' : 'Θέμα' }) }}
+        {{ form_row(form.body,{ 'label' : 'Σχόλια' }) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Αποστολή" />
+    </form>
+{% endblock %}

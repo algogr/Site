@@ -1,0 +1,29 @@
+set :application, "Algo Site"
+set :domain,      "www.algo.gr"
+set :deploy_to,   "/var/www/Site"
+set :app_path,    "app"
+set :user, "www-data"
+
+set :repository,  "git@github.com:/algogr/Site.git"
+set :scm,         :git
+# Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
+
+set :model_manager, "doctrine"
+# Or: `propel`
+
+set :shared_files,      ["app/config/parameters.yml"]
+set :shared_children,     [app_path + "/logs", web_path + "/uploads", "vendor"]
+set :use_composer, true
+set :update_vendors, true
+
+
+role :web,        domain                         # Your HTTP server, Apache/etc
+role :app,        domain, :primary => true       # This may be the same as your `Web` server
+
+set  :keep_releases,  3
+set  :use_sudo,      false
+after "deploy", "deploy:cleanup"
+# Be more verbose by uncommenting the following line
+logger.level = Logger::MAX_LEVEL
+default_run_options[:pty] = true
+
