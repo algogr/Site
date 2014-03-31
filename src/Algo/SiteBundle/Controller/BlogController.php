@@ -112,7 +112,7 @@ class BlogController extends Controller
 	{
 		$blog = new Blog();
 		$form = $this->createForm(new BlogType(), $blog);
-		$blog->createBrief();
+		
 		$request = $this->getRequest();
 		if ($request->getMethod() == 'POST') {
 			$form->bindRequest($request);
@@ -121,6 +121,7 @@ class BlogController extends Controller
 				$em = $this->getDoctrine()
 				->getEntityManager();
 				$blog->upload();
+				$blog->createBrief();
 				$em->persist($blog);
 				$em->flush();
 				// Perform some action, such as sending an email

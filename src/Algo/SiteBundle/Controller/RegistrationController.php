@@ -27,7 +27,7 @@ class RegistrationController extends BaseController
 		$dispatcher = $this->container->get('event_dispatcher');
 	
 		$user = $userManager->createUser();
-		$user->setEnabled(true);
+		
 	
 		$event = new GetResponseUserEvent($user, $request);
 		$dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
@@ -38,13 +38,16 @@ class RegistrationController extends BaseController
 	
 		$form = $formFactory->createForm();
 		$form->setData($user);
-	
-		if ('POST' === $request->getMethod()) {
+		
+		
+		if ($request->getMethod()=='POST') {
+			
 			$form->bind($request);
-	
 			if ($form->isValid()) {
+				
 				$event = new FormEvent($form, $request);
 				$dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+				$user->setEnabled(false);
 				$userManager->updateUser($user);
 	            /**************************************
 	            *******My functionality send email*****

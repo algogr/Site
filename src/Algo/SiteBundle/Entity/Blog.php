@@ -343,7 +343,12 @@ class Blog
     public function createBrief()
     {
     	$summarytext=$this->getBlog();
-    	$endchar=strpos($summarytext,'.',100);
+    	if (strlen($summarytext)<100)
+    		$offset=0;
+    	else 
+    		$offset=100;
+    	
+    	$endchar=strpos($summarytext,'.',$offset);
     	if(!$endchar)
     	{
     		$this->setBrief($summarytext);
