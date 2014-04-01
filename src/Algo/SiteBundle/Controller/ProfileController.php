@@ -5,14 +5,18 @@ namespace Algo\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-//use Symfony\Component\HttpFoundation\RedirectResponse;
-//use FOS\UserBundle\Controller\SecurityController as Base//Controller;
-class ProfileController extends Controller
+use Entities\User;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use FOS\UserBundle\Controller\SecurityController as BaseController;
+class ProfileController extends BaseController
 {
 
 	public function showAction()
 	{
 		$user = $this->container->get('security.context')->getToken()->getUser();
+		//$logger=$this->get('logger');
+		//$logger->info('jim instanceof'. get_class($user));
 		if (!is_object($user) || !$user instanceof UserInterface) {
 			throw new AccessDeniedException('This user does not have access to this section.');
 		}
