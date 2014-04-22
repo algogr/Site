@@ -1,0 +1,18 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name: algo_site
+    database_user: root
+    database_password: ''
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: test
+    mailer_password: 
+    locale: en
+    secret: a1792d02240dd774203c0701489245a999a285d9
+    database_path: null
+    max_articles_on_listpage: 10
+    registration_send_to: 'support@algo.gr'
+    registration_send_from: 'support@algo.gr'
+    admin_email: 'jimpar@algo.gr'
