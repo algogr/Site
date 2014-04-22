@@ -24,7 +24,8 @@
         {{ form_row(form.enabled,{ 'label' : 'Enabled' }) }}
         {{ form_row(form.approved,{ 'label' : 'Approved' }) }}
         {{ form_row(form.email,{ 'label' : 'Email' }) }}
-		{{ form_row(form.rolelist{ 'label' : 'Roles' }) }}
+		{{ form_row(form.rolelist,{ 'label' : 'Roles' }) }}
+		{{ form_row(form.activation_email,{'label' : 'Send activation email to the user'}) }}
         {{ form_rest(form) }}
 
         <input type="submit" value="Αποστολή" />

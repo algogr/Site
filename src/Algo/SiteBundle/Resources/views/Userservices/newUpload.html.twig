@@ -1,0 +1,32 @@
+{# src/Algo/SiteBundle/Resources/views/Userservices/newUpload.html.twig #}
+{% extends '::layout.html.twig' %}
+
+{% block title %}Ανέβασμα αρχείου{% endblock %}
+{% block article %}
+    <header>
+        <h1></h1>
+     <p></p>
+    
+    <form action="{{ path('AlgoSiteBundle_upload') }}" method="post" {{ form_enctype(form) }} class="blogger">
+    
+        {{ form_errors(form) }}
+        
+		{{ form_row (form._token) }}    
+
+        {{ form_row(form.shortdescr,{ 'label' : 'Σύντομη περιγραφή' }) }}
+        {{ form_row(form.descr,{ 'label' : 'Περιγραφή' }) }}
+        
+        {{ form_row(form.file,{ 'label' : 'Επιλογή αρχείου' }) }}
+        
+        {% if is_granted('ROLE_ADMIN') %}
+        
+		{{ form_row(form.role) }}
+		{{ form_row(form.usersallowed) }}    
+        
+        {{ form_row(form.public,{ 'label' : 'Public' }) }}
+        {% endif %}
+        
+
+        <input type="submit" value="Αποστολή" />
+    </form>
+{% endblock %}

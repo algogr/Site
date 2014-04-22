@@ -8,7 +8,7 @@
     
 
     <label for="name">Επωνυμία</label>
-    <input type="text" id="name" name="name" readonly="true" placeholder={{ user.name | json_encode() | raw }}/>
+    <input type="text" id="name" name="name" readonly="true" placeholder={{ user.name | raw }}/>
 	<p>
 	<label for="email">Email</label>
 	<input type="text" id="email" name="email" readonly="true" placeholder={{ user.email | json_encode() | raw }}/>

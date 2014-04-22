@@ -1,0 +1,69 @@
+<?php
+// src/Algo/SiteBundle/Entity/Role.php
+
+namespace Algo\SiteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="roles")
+ */
+
+class Role
+{
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
+	
+	/**
+	 * @ORM\Column(type="string", unique=true)
+	 */
+	protected $description;
+
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $hierarchy;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Document", mappedBy="role")
+	 */
+	protected $documents;
+	
+	public function __construct()
+	{
+		$this->documents= new ArrayCollection();
+	}
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Role
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+}

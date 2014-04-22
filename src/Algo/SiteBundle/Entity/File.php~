@@ -1,0 +1,62 @@
+<?php
+// src/Algo/SiteBundle/Entity/File.php
+
+namespace Algo\SiteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="files")
+ */
+
+class File
+{
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
+	
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	protected $filename;
+	
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	protected $short_descr;
+	
+	/**
+	 * @ORM\Column(type="text")
+	 */
+	protected $descr;
+	
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	protected $path;
+	
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $uploaderid;
+	
+	/**
+	 * @ORM\Column(type="text")
+	 */
+	protected $roles; 
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $viewbyid;
+     
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $public;
+     
+}

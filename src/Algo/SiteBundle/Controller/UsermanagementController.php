@@ -90,21 +90,7 @@ class UsermanagementController extends Controller
 				
 			}
 			
-			/**
-			foreach ($roles as $selectedOption)
-				
-			{
-				if ($selectedOption=='ROLE_USER')
-				{
-						$logger->info ('I just got the logger epitelous:'.$selectedOption);
-						$user->addRole('ROLE_USER');
-				}
-				
-				//$user->addRole($selectedOption);
 			
-			}
-			**/
-			//$user->addRole('ROLE_USER');
 		
 			if ($form->isValid()) {
 				//$logger->info ('I just got the logger:'.$selectedOption);
@@ -117,6 +103,19 @@ class UsermanagementController extends Controller
 		
 				// Redirect - This is important to prevent users re-posting
 				// the form if they refresh the page
+				if ($form['activation_email'])
+				{
+				
+				
+					$send_from=$this->container->getParameter('registration_send_from');
+					$message = \Swift_Message::newInstance()
+					->setSubject('Ενεργοποίηση λογαριασμού')
+					->setFrom($send_from)
+					->setTo($user->getEmail())
+					->setBody($this->renderView('AlgoSiteBundle:Security:activationEmail.txt.twig', array('user' => $user)));
+					$this->container->get('mailer')->send($message);
+				
+				}
 				return $this->redirect($this->generateUrl('AlgoSiteBundle_user_management'));
 			}
 		}

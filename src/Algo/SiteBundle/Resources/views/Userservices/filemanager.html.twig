@@ -1,0 +1,93 @@
+{# src/Algo/SiteBundle/Resources/views/Userservices/filemanager.html.twig #}
+{% extends '::layout.html.twig' %}
+{%  block title %}Διαχείριση αρχείων {% endblock %}
+{% block stylesheets %}
+ {{ parent() }}
+ <link rel="stylesheet" href={{ asset('js/dojo/dijit/themes/claro/claro.css') }}>
+ <link rel="stylesheet" href={{ asset('js/dojo/resources/dojo.css') }}>
+ <link rel="stylesheet" href={{ asset('js/dojo/dgrid/css/dgrid.css') }}>
+ <link rel="stylesheet" href={{ asset('js/dojo/dgrid/css/skins/claro.css') }}> 
+ 
+ 
+{% endblock %}
+{%  block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/dojo/dojo/dojo.js') }}" 
+        data-dojo-config="async:true, parseOnLoad:true">
+        
+        </script>
+        <script>
+    require(["dojo/parser"]);
+    require(["dgrid/Grid", "dojo/domReady!"],function(Grid){
+    	var data = [
+                    
+
+                    {% for doc in docsset %}
+                    { docid: {{ doc.id | json_encode() }}, uploaded: {{ doc.uploaded | date('d/m/Y H:i:s')| json_encode() | raw }},shortdescr: {{ doc.shortdescr | json_encode() | raw }}, filename: {{ doc.filename |json_encode()|raw }}, docpath: {{ doc.path |json_encode()|raw }}, uploader:{{ doc.uploaderid |json_encode()|raw }}, ispublic: {{ doc.public|json_encode()}}},
+                    {% endfor %}
+                         
+            //{ username: "Bob", email: "Barker", enabled: 89,approved: 1 },
+            //{ first: "Vanna", last: "White", age: 55 },
+            //{ first: "Pat", last: "Sajak", age: 65 }
+        ];
+    	var columns=[
+                  	
+						{
+							label: "Ημερομηνία",
+							field: "uploaded"
+							
+						},
+						{
+							label: "Σύντομη Περιγραφή",
+							field: "shortdescr"
+						},
+						{
+							label: "Όνομα",
+							field: "filename"
+						},
+						
+						{
+							label: "Χρήστης",
+							field: "uploader"
+						},
+						{
+							label: "Public",
+							field: "ispublic"
+						},
+						{
+							label: "Προβολή",
+							field: "docpath",
+							formatter: function url(docpath){
+								var xx='<a href=\"'+Routing.generate('AlgoSiteBundle_doc_edit', { docpath: docpath })+'\">'+"..."+"</a>";
+								return xx;
+							}
+						
+						},
+						
+
+						
+				];
+    	 var grid = new Grid({columns: columns}, "grid");
+         grid.renderArray(data);
+
+
+        });     
+            </script>
+       
+{%  endblock %}
+
+
+      
+{% block article %}
+{#
+          {% for user in users %}
+        <div class="article">
+          <span><a href="{{ path('AlgoSiteBundle_user_show', { 'id':user.id }) }}">{{ user.name(25) }}</a>
+          {{ user.email }}&nbsp {{ user.user }}&nbsp{{ user.enabled }}&nbsp{{ user. approved }}
+          {% endfor %}  #}
+          
+          <div id="grid" class="claro">
+          
+          </div> 
+      
+{% endblock %}

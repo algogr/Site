@@ -493,6 +493,10 @@ ol li .send {
 .footer_resize .rf {
 	float:right;
 }
+.dgrid {
+   
+    height: auto;
+}
 a {
 	outline:none;
 }

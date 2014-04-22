@@ -5,6 +5,7 @@ namespace Algo\SiteBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
@@ -26,9 +27,17 @@ class UserType extends AbstractType
 		// 'data' => array('ROLE_USER'=>'ROLE_USER',),
 		'multiple'  => true)
 		);
+		$builder->add('activation_email','checkbox',array('property_path' => false));
 		
 	}
-
+	/*
+	public function setDefaultOptions(OptionsResolverInterface $resolver)
+	{
+		$resolver->setDefaults(array(
+				'data_class' => 'Algo\SiteBundle\Entity\User',
+		));
+	}
+*/
 	public function getName()
 	{
 		return 'user';

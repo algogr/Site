@@ -38,10 +38,36 @@ AlgoSiteBundle_blog_new:
  #   _method:  GET
 
 AlgoSiteBundle_upload:
-    pattern: /admin/blog/new
-    defaults: { _controller: AlgoSiteBundle:Blog:new }
+    pattern: /user/services/upload/new
+    defaults: { _controller: AlgoSiteBundle:Userservices:new_upload }
     requirements:
         _method:  GET|POST
+        
+AlgoSiteBundle_filemanager:
+    pattern: /user/services/filemanager
+    defaults: { _controller: AlgoSiteBundle:Userservices:filemanager }
+    requirements:
+        _method:  GET
+        
+AlgoSiteBundle_doc_edit:
+    pattern:  /services/doc/{docpath}
+    defaults: { _controller: AlgoSiteBundle:Userservices:editdoc }
+    requirements:
+        _method:  GET|POST
+        
+AlgoSiteBundle_doc_download:
+    pattern:  /services/download/{docpath}
+    defaults: { _controller: AlgoSiteBundle:Userservices:download }
+    requirements:
+        _method:  GET
+
+AlgoSiteBundle_doc_delete:
+    pattern:  /services/delete/{docpath}
+    defaults: { _controller: AlgoSiteBundle:Userservices:delete }
+    requirements:
+        _method:  GET
+        
+        
 
 AlgoSiteBundle_article_list:
     pattern: /page/{page}
